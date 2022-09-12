@@ -1,10 +1,10 @@
 class ApplicationController < Sinatra::Base
   set :default_content_type, 'application/json'
 
-  before do
-    request.body.rewind
-    @request_payload = JSON.parse request.body.read
-  end
+  # before do
+  #   request.body.rewind
+  #   @request_payload = JSON.parse request.body.read
+  # end
   
   # Add your routes here
   get "/" do
@@ -21,19 +21,19 @@ class ApplicationController < Sinatra::Base
     airline.to_json
   end
 
-  # put '/airlines/:id' do
-  #   airline = Airline.find_by(id: params[:id])
+  put '/airlines/:id' do
+    airline = Airline.find_by(id: params[:id])
 
-  #   airline.update(name: @request_payload.name, image_url: @request_payload.image_url)
+    airline.update(name: @request_payload.name, image_url: @request_payload.image_url)
 
-  #   airline.to_json
-  # end
+    airline.to_json
+  end
 
-  # delete '/airlines/:id' do
-  #   all_airlines = Airline.all
-  #   all_airlines.destroy
-  #   all_airlines.to_json
-  # end
+  delete '/airlines/:id' do
+    all_airlines = Airline.all
+    all_airlines.destroy
+    all_airlines.to_json
+  end
 
   get '/reviews/:id' do
     reviews= Review.all
